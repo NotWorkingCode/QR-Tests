@@ -10,4 +10,7 @@ interface MainView: MvpView {
     fun addTest(test: String)
     fun showProgress()
     fun hideProgress()
+    fun showRequestPermissionButton()
+    fun hideRequestPermissionButton()
+    fun checkPermission()
 }

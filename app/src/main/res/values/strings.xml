@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">QR Tests</string>
+    <string name="request_permission">Предоставить разрешение</string>
 </resources>
