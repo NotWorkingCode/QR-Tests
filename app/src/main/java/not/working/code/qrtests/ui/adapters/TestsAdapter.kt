@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recycler_item_test.view.*
 import not.working.code.qrtests.R
+import not.working.code.qrtests.utils.enums.ClickTestTypeEnum
 
-class TestsAdapter(val context: Context): RecyclerView.Adapter<TestsAdapter.TestsViewHolder>() {
+class TestsAdapter(val context: Context, val clickCallback: (position: Int, clickType: ClickTestTypeEnum) -> Unit): RecyclerView.Adapter<TestsAdapter.TestsViewHolder>() {
 
     private val tests = ArrayList<String>()
 
@@ -29,6 +30,12 @@ class TestsAdapter(val context: Context): RecyclerView.Adapter<TestsAdapter.Test
     override fun onBindViewHolder(holder: TestsViewHolder, position: Int) {
         holder.apply {
             title.text = tests[position]
+            itemView.setOnClickListener {
+                clickCallback(position, ClickTestTypeEnum.OPEN_TEST)
+            }
+            itemView.c_delete_test.setOnClickListener {
+                clickCallback(position, ClickTestTypeEnum.DELETE_TEST)
+            }
         }
     }
 

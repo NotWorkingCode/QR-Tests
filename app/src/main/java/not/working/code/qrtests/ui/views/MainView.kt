@@ -13,4 +13,5 @@ interface MainView: MvpView {
     fun showRequestPermissionButton()
     fun hideRequestPermissionButton()
     fun checkPermission()
+    fun showError(message: Int)
 }

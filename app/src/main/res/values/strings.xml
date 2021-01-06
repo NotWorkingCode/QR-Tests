@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">QR Tests</string>
     <string name="request_permission">Предоставить разрешение</string>
+    <string name="empty_tests_folder">Вы не создали ни одного теста.</string>
 </resources>

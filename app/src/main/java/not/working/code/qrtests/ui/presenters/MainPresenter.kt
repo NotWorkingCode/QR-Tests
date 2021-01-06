@@ -1,13 +1,18 @@
 package not.working.code.qrtests.ui.presenters
 
+import android.content.Context
 import android.util.Log
-import moxy.InjectViewState
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import not.working.code.qrtests.R
+import not.working.code.qrtests.ui.providers.MainProvider
 import not.working.code.qrtests.ui.views.MainView
 
-class MainPresenter: MvpPresenter<MainView>() {
+class MainPresenter(val context: Context): MvpPresenter<MainView>() {
 
     private var tests = ArrayList<String>()
+    private val provider = MainProvider(presenter = this, context = context)
 
     override fun onFirstViewAttach() {
         viewState.checkPermission()
@@ -28,9 +33,26 @@ class MainPresenter: MvpPresenter<MainView>() {
         viewState.showRequestPermissionButton()
     }
 
+    fun openTest(position: Int) {
+        Log.e("TEST_CLICK", "I open project -> ${tests[position]}")
+    }
+
+    fun deleteTest(position: Int) {
+        Log.e("TEST_CLICK", "I delete project -> ${tests[position]}")
+    }
+
     private fun loadTests() {
-        tests.add("Test")
-        viewState.hideProgress()
-        viewState.updateTestAdapter(tests)
+        val dispose = provider.loadAllTests()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    tests.add(it)
+                }, {
+                    viewState.hideProgress()
+                    viewState.showError(R.string.empty_tests_folder)
+                }, {
+                    viewState.hideProgress()
+                    viewState.updateTestAdapter(tests)
+                })
     }
 }
