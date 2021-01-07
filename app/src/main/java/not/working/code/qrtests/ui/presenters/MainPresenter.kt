@@ -12,6 +12,8 @@ import not.working.code.qrtests.ui.views.MainView
 class MainPresenter(val context: Context): MvpPresenter<MainView>() {
 
     private var tests = ArrayList<String>()
+    private var isShowFAB = false
+
     private val provider = MainProvider(context = context)
 
     override fun onFirstViewAttach() {
@@ -39,6 +41,15 @@ class MainPresenter(val context: Context): MvpPresenter<MainView>() {
 
     fun deleteTest(position: Int) {
         Log.e("TEST_CLICK", "I delete project -> ${tests[position]}")
+    }
+
+    fun clickFAB() {
+        if (isShowFAB) {
+            viewState.hideFAB()
+        } else {
+            viewState.showFAB()
+        }
+        isShowFAB = !isShowFAB
     }
 
     private fun loadTests() {

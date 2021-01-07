@@ -27,7 +27,7 @@ class MainProvider(val context: Context) {
 
     private fun createFolder(){
         if (!TESTS_PATH.isDirectory) {
-            val t = TESTS_PATH.mkdir()
+            TESTS_PATH.mkdir()
         }
     }
 }

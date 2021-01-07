@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_test.view.*
 import not.working.code.qrtests.R
-import not.working.code.qrtests.utils.enums.ClickTestTypeEnum
+import not.working.code.qrtests.utils.enums.ClickType
 
-class TestsAdapter(val context: Context, val clickCallback: (position: Int, clickType: ClickTestTypeEnum) -> Unit): RecyclerView.Adapter<TestsAdapter.TestsViewHolder>() {
+class TestsAdapter(val context: Context, val clickCallback: (position: Int, clickType: ClickType) -> Unit): RecyclerView.Adapter<TestsAdapter.TestsViewHolder>() {
 
     private val tests = ArrayList<String>()
 
@@ -31,10 +31,10 @@ class TestsAdapter(val context: Context, val clickCallback: (position: Int, clic
         holder.apply {
             title.text = tests[position]
             itemView.setOnClickListener {
-                clickCallback(position, ClickTestTypeEnum.OPEN_TEST)
+                clickCallback(position, ClickType.OPEN_TEST)
             }
             deleteBtn.setOnClickListener {
-                clickCallback(position, ClickTestTypeEnum.DELETE_TEST)
+                clickCallback(position, ClickType.DELETE_TEST)
             }
         }
     }

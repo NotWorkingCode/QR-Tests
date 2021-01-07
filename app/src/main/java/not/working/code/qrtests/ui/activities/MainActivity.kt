@@ -13,11 +13,12 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import not.working.code.qrtests.R
 import not.working.code.qrtests.ui.adapters.TestsAdapter
+import not.working.code.qrtests.ui.animations.FABAnimation
 import not.working.code.qrtests.ui.presenters.MainPresenter
 import not.working.code.qrtests.ui.views.MainView
 import kotlin.collections.ArrayList
 import not.working.code.qrtests.utils.*
-import not.working.code.qrtests.utils.enums.TestClickType
+import not.working.code.qrtests.utils.enums.ClickType
 
 class MainActivity : MvpAppCompatActivity(), MainView{
 
@@ -37,8 +38,8 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
         adapter = TestsAdapter(context = this) {position, clickType ->
             when(clickType) {
-                TestClickType.OPEN_TEST -> presenter.openTest(position = position)
-                TestClickType.DELETE_TEST -> presenter.deleteTest(position = position)
+                ClickType.OPEN_TEST -> presenter.openTest(position = position)
+                ClickType.DELETE_TEST -> presenter.deleteTest(position = position)
             }
         }
         activity_main_rv_tests.layoutManager = LinearLayoutManager(this)
@@ -46,6 +47,13 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
         activity_main_btn_request_permission.setOnClickListener {
             checkPermission()
+        }
+
+        FABAnimation.init(activity_main_fab_create_test)
+        FABAnimation.init(activity_main_fab_qr_scanning)
+
+        activity_main_fab_main.setOnClickListener {
+            presenter.clickFAB()
         }
     }
 
@@ -89,6 +97,18 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
     override fun hideEmptyTestList() {
         activity_main_tv_no_tests.visibility = View.GONE
+    }
+
+    override fun showFAB() {
+        FABAnimation.rotateFAB(view = activity_main_fab_main, rotate =  true)
+        FABAnimation.showIn(view = activity_main_fab_create_test)
+        FABAnimation.showIn(view = activity_main_fab_qr_scanning)
+    }
+
+    override fun hideFAB() {
+        FABAnimation.rotateFAB(view = activity_main_fab_main, rotate =  false)
+        FABAnimation.showOut(view = activity_main_fab_create_test)
+        FABAnimation.showOut(view = activity_main_fab_qr_scanning)
     }
 
     override fun showEmptyTestsList() {

@@ -16,4 +16,6 @@ interface MainView: MvpView {
     fun showError(message: Int)
     fun showEmptyTestsList()
     fun hideEmptyTestList()
+    fun showFAB()
+    fun hideFAB()
 }
