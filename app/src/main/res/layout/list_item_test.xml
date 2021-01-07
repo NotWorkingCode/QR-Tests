@@ -8,7 +8,7 @@
     android:clickable="true">
 
     <TextView
-        android:id="@+id/e_test_title"
+        android:id="@+id/list_item_test_tv_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="13dp"
@@ -17,11 +17,10 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/c_delete_test"
-        tools:text="еуывпыпыыыыыыыыыыыыы" />
+        app:layout_constraintRight_toLeftOf="@id/list_item_test_ibtn_delete"/>
 
     <ImageButton
-        android:id="@+id/c_delete_test"
+        android:id="@+id/list_item_test_ibtn_delete"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/ic_delete"
@@ -29,8 +28,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/e_test_title"
-        android:layout_marginRight="30dp"
+        app:layout_constraintLeft_toRightOf="@id/list_item_test_tv_title"
+        android:layout_marginRight="10dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"/>
 

@@ -1,12 +1,11 @@
 package not.working.code.qrtests.ui.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.recycler_item_test.view.*
+import kotlinx.android.synthetic.main.list_item_test.view.*
 import not.working.code.qrtests.R
 import not.working.code.qrtests.utils.enums.ClickTestTypeEnum
 
@@ -15,11 +14,12 @@ class TestsAdapter(val context: Context, val clickCallback: (position: Int, clic
     private val tests = ArrayList<String>()
 
     class TestsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title = itemView.e_test_title
+        val title = itemView.list_item_test_tv_title
+        val deleteBtn = itemView.list_item_test_ibtn_delete
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestsViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.recycler_item_test, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.list_item_test, parent, false)
         return TestsViewHolder(view)
     }
 
@@ -33,7 +33,7 @@ class TestsAdapter(val context: Context, val clickCallback: (position: Int, clic
             itemView.setOnClickListener {
                 clickCallback(position, ClickTestTypeEnum.OPEN_TEST)
             }
-            itemView.c_delete_test.setOnClickListener {
+            deleteBtn.setOnClickListener {
                 clickCallback(position, ClickTestTypeEnum.DELETE_TEST)
             }
         }

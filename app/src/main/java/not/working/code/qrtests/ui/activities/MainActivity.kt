@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +17,7 @@ import not.working.code.qrtests.ui.presenters.MainPresenter
 import not.working.code.qrtests.ui.views.MainView
 import kotlin.collections.ArrayList
 import not.working.code.qrtests.utils.*
-import not.working.code.qrtests.utils.enums.ClickTestTypeEnum
+import not.working.code.qrtests.utils.enums.TestClickType
 
 class MainActivity : MvpAppCompatActivity(), MainView{
 
@@ -27,7 +26,7 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
     @ProvidePresenter
     fun provide(): MainPresenter{
-        return MainPresenter(applicationContext)
+        return MainPresenter(context = applicationContext)
     }
 
     private lateinit var adapter: TestsAdapter
@@ -38,14 +37,14 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
         adapter = TestsAdapter(context = this) {position, clickType ->
             when(clickType) {
-                ClickTestTypeEnum.OPEN_TEST -> presenter.openTest(position = position)
-                ClickTestTypeEnum.DELETE_TEST -> presenter.deleteTest(position = position)
+                TestClickType.OPEN_TEST -> presenter.openTest(position = position)
+                TestClickType.DELETE_TEST -> presenter.deleteTest(position = position)
             }
         }
-        e_recycler_tests.layoutManager = LinearLayoutManager(this)
-        e_recycler_tests.adapter = adapter
+        activity_main_rv_tests.layoutManager = LinearLayoutManager(this)
+        activity_main_rv_tests.adapter = adapter
 
-        d_request_permission_button.setOnClickListener {
+        activity_main_btn_request_permission.setOnClickListener {
             checkPermission()
         }
     }
@@ -59,19 +58,19 @@ class MainActivity : MvpAppCompatActivity(), MainView{
     }
 
     override fun showProgress() {
-        d_load_tests_progress.visibility = View.VISIBLE
+        activity_main_pb_load_tests.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-        d_load_tests_progress.visibility = View.GONE
+        activity_main_pb_load_tests.visibility = View.GONE
     }
 
     override fun showRequestPermissionButton() {
-        d_request_permission_button.visibility = View.VISIBLE
+        activity_main_btn_request_permission.visibility = View.VISIBLE
     }
 
     override fun hideRequestPermissionButton() {
-        d_request_permission_button.visibility = View.GONE
+        activity_main_btn_request_permission.visibility = View.GONE
     }
 
     override fun checkPermission() {
@@ -86,6 +85,14 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
     override fun showError(message: Int) {
         showToast(message = message)
+    }
+
+    override fun hideEmptyTestList() {
+        activity_main_tv_no_tests.visibility = View.GONE
+    }
+
+    override fun showEmptyTestsList() {
+        activity_main_tv_no_tests.visibility = View.VISIBLE
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

@@ -7,7 +7,7 @@
     tools:context=".ui.activities.MainActivity">
 
     <ProgressBar
-        android:id="@+id/d_load_tests_progress"
+        android:id="@+id/activity_main_pb_load_tests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,21 +17,32 @@
         android:visibility="gone"/>
 
     <Button
-        android:id="@+id/d_request_permission_button"
+        android:id="@+id/activity_main_btn_request_permission"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="@string/request_permission"
+        android:text="@string/request.permission"
         android:textAllCaps="false"
         android:backgroundTint="@color/green_500"
         android:textColor="@color/white"
         android:visibility="gone"/>
 
+    <TextView
+        android:id="@+id/activity_main_tv_no_tests"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/error.test.folder.empty"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/e_recycler_tests"
+        android:id="@+id/activity_main_rv_tests"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

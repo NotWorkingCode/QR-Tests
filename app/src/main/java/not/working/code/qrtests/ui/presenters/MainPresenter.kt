@@ -12,7 +12,7 @@ import not.working.code.qrtests.ui.views.MainView
 class MainPresenter(val context: Context): MvpPresenter<MainView>() {
 
     private var tests = ArrayList<String>()
-    private val provider = MainProvider(presenter = this, context = context)
+    private val provider = MainProvider(context = context)
 
     override fun onFirstViewAttach() {
         viewState.checkPermission()
@@ -49,9 +49,12 @@ class MainPresenter(val context: Context): MvpPresenter<MainView>() {
                     tests.add(it)
                 }, {
                     viewState.hideProgress()
-                    viewState.showError(R.string.empty_tests_folder)
+                    Log.e("TEST_CLICK", "I show")
+                    viewState.showEmptyTestsList()
                 }, {
                     viewState.hideProgress()
+                    viewState.hideEmptyTestList()
+                    Log.e("TEST_CLICK", "I hide")
                     viewState.updateTestAdapter(tests)
                 })
     }

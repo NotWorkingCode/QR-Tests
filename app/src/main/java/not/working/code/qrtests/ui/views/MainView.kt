@@ -14,4 +14,6 @@ interface MainView: MvpView {
     fun hideRequestPermissionButton()
     fun checkPermission()
     fun showError(message: Int)
+    fun showEmptyTestsList()
+    fun hideEmptyTestList()
 }
