@@ -1,5 +1,6 @@
 package not.working.code.qrtests.ui.views
 
+import moxy.MvpAppCompatActivity
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

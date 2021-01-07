@@ -1,6 +1,7 @@
 package not.working.code.qrtests.ui.activities
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -54,6 +55,10 @@ class MainActivity : MvpAppCompatActivity(), MainView{
 
         activity_main_fab_main.setOnClickListener {
             presenter.clickFAB()
+        }
+
+        activity_main_fab_create_test.setOnClickListener {
+            startActivity(Intent(this, CreateTestActivity::class.java))
         }
     }
 

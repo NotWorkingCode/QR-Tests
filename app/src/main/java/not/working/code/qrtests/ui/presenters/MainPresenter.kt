@@ -60,12 +60,10 @@ class MainPresenter(val context: Context): MvpPresenter<MainView>() {
                     tests.add(it)
                 }, {
                     viewState.hideProgress()
-                    Log.e("TEST_CLICK", "I show")
                     viewState.showEmptyTestsList()
                 }, {
                     viewState.hideProgress()
                     viewState.hideEmptyTestList()
-                    Log.e("TEST_CLICK", "I hide")
                     viewState.updateTestAdapter(tests)
                 })
     }

@@ -1,5 +1,21 @@
 <resources>
     <string name="app_name">QR Tests</string>
+
+    <string name="create.test.title.step.one">Этап 1/2</string>
+    <string name="create.test.title.step.two">Этап 2/2</string>
+    <string name="create.test.informer.question">Вопрос:</string>
+    <string name="create.test.informer.separator">/</string>
+    <string name="create.test.answer.one">Ответ 1</string>
+    <string name="create.test.answer.two">Ответ 2</string>
+    <string name="create.test.answer.three">Ответ 3</string>
+    <string name="create.test.answer.four">Ответ 4</string>
+
     <string name="request.permission">Предоставить разрешение</string>
+
     <string name="error.test.folder.empty">Вы не создали ни одного теста.</string>
+    <string name="error.test.create.empty">Заполните все поля.</string>
+    <string name="error.test.create.first.question">Вы находитесь на первом вопросе.</string>
+    <string name="error.test.create.last.question">Вы находитесь на последнем вопросе</string>
+    <string name="error.test.create.max">Максимальное кол-во символов в ответе: 30</string>
+    <string name="error.test.create.max.question">Максимальное кол-во вопросов: 10</string>
 </resources>
