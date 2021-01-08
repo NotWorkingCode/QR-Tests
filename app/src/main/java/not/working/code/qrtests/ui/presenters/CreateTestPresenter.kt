@@ -39,7 +39,7 @@ class CreateTestPresenter: MvpPresenter<CreateTestView>() {
     fun addQuestion(question: Question) {
         if (isNotEmptyQuestion(question = question)) {
             if (isNotMaxLengthQuestion(question = question)) {
-                if (currentQuestion <= 10) {
+                if (currentQuestion < 10) {
                     questions.put(currentQuestion, question)
                     maxQuestion += 1
                     currentQuestion = maxQuestion
