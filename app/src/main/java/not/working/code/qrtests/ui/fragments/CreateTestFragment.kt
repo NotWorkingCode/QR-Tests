@@ -1,9 +1,7 @@
 package not.working.code.qrtests.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import kotlinx.android.synthetic.main.fragment_create_test.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -21,6 +19,7 @@ class CreateTestFragment: MvpAppCompatFragment(), CreateTestView {
     lateinit var presenter: CreateTestPresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_create_test, container, false)
     }
 
@@ -39,6 +38,18 @@ class CreateTestFragment: MvpAppCompatFragment(), CreateTestView {
         fragment_create_test_btn_add.setOnClickListener {
             presenter.addQuestion(question = getQuestion())
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.create_test_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_create_test_ok -> presenter.clickAcceptTest()
+            else -> return false
+        }
+        return true
     }
 
     override fun changeQuestion(mode: ChangeQuestion, question: Question) {
@@ -63,6 +74,10 @@ class CreateTestFragment: MvpAppCompatFragment(), CreateTestView {
 
     override fun showError(message: Int) {
         activity?.showSnackbar(view = fragment_create_test_ll_question_manager, message = message)
+    }
+
+    fun clickAcceptThisTest(item: MenuItem) {
+        showError(R.string.app_name)
     }
 
     private fun clearEditText() {

@@ -50,6 +50,10 @@ class CreateTestPresenter: MvpPresenter<CreateTestView>() {
         } else viewState.showError(R.string.error_test_create_empty)
     }
 
+    fun clickAcceptTest() {
+        viewState.showError(R.string.app_name)
+    }
+
     private fun isNotEmptyQuestion(question: Question): Boolean {
         if (question.question.isEmpty()) return false
         if (question.answerOne.isEmpty()) return false
