@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_create_test.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import not.working.code.qrtests.R
+import not.working.code.qrtests.ui.animations.ChangeQuestionAnimation
 import not.working.code.qrtests.ui.presenters.CreateTestPresenter
 import not.working.code.qrtests.ui.views.CreateTestView
 import not.working.code.qrtests.utils.data.Question
@@ -41,15 +42,18 @@ class CreateTestFragment: MvpAppCompatFragment(), CreateTestView {
     }
 
     override fun changeQuestion(mode: ChangeQuestion, question: Question) {
-        setQuestion(question = question)
         when(mode) {
-            ChangeQuestion.NEXT -> {}
-            ChangeQuestion.PREVIOUS -> {}
+            ChangeQuestion.NEXT -> {
+                ChangeQuestionAnimation.showNext(fragment_create_test_root) {setQuestion(question)}
+            }
+            ChangeQuestion.PREVIOUS -> {
+                ChangeQuestionAnimation.showPrevious(fragment_create_test_root) {setQuestion(question)}
+            }
         }
     }
 
     override fun addQuestion() {
-        clearEditText()
+        ChangeQuestionAnimation.showNext(fragment_create_test_root) {clearEditText()}
     }
 
     override fun updateInformer(currentQuestion: Int, maxQuestion: Int) {
