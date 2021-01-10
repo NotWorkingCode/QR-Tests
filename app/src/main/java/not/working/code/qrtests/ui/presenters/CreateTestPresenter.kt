@@ -16,16 +16,17 @@ class CreateTestPresenter: MvpPresenter<CreateTestView>() {
     fun changeQuestion(mode: ChangeQuestion, question: Question) {
         if (isNotEmptyQuestion(question = question)) {
             if (isNotMaxLengthQuestion(question = question)) {
-                questions.put(currentQuestion, question)
                 when(mode) {
                     ChangeQuestion.NEXT -> {
                         if (currentQuestion < maxQuestion) {
+                            questions[currentQuestion] = question
                             currentQuestion += 1
                             viewState.changeQuestion(mode = ChangeQuestion.NEXT, question = questions.get(currentQuestion)!!)
                         } else viewState.showError(R.string.error_test_create_last_question)
                     }
                     ChangeQuestion.PREVIOUS -> {
                         if (currentQuestion != 1) {
+                            questions[currentQuestion] = question
                             currentQuestion -= 1
                             viewState.changeQuestion(mode = ChangeQuestion.PREVIOUS, question = questions.get(currentQuestion)!!)
                         } else viewState.showError(R.string.error_test_create_first_question)
@@ -40,7 +41,7 @@ class CreateTestPresenter: MvpPresenter<CreateTestView>() {
         if (isNotEmptyQuestion(question = question)) {
             if (isNotMaxLengthQuestion(question = question)) {
                 if (currentQuestion < 10) {
-                    questions.put(currentQuestion, question)
+                    questions[currentQuestion] = question
                     maxQuestion += 1
                     currentQuestion = maxQuestion
                     viewState.updateInformer(currentQuestion = currentQuestion, maxQuestion = maxQuestion)
@@ -50,8 +51,13 @@ class CreateTestPresenter: MvpPresenter<CreateTestView>() {
         } else viewState.showError(R.string.error_test_create_empty)
     }
 
-    fun clickAcceptTest() {
-        viewState.showError(R.string.app_name)
+    fun clickAcceptTest(question: Question) {
+        if (isNotEmptyQuestion(question = question)) {
+            if (isNotMaxLengthQuestion(question = question)) {
+                questions[currentQuestion] = question
+                viewState.goSelectAnswer()
+            } else viewState.showError(R.string.error_test_create_max)
+        } else viewState.showError(R.string.error_test_create_empty)
     }
 
     private fun isNotEmptyQuestion(question: Question): Boolean {

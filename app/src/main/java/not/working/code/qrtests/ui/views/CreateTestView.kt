@@ -12,4 +12,5 @@ interface CreateTestView: MvpView {
     fun addQuestion()
     fun updateInformer(currentQuestion: Int, maxQuestion: Int)
     fun showError(message: Int)
+    fun goSelectAnswer()
 }
